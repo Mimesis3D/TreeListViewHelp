@@ -1,0 +1,20 @@
+﻿<dx:ThemedWindow
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Class="TreeListViewControlExample.Views.ShellWindowView" 
+    prism:ViewModelLocator.AutoWireViewModel="True" 
+    mc:Ignorable="d" 
+    Title="{Binding Title}" WindowStartupLocation="CenterScreen" Height="1080" Width="1480"
+    >
+
+    <dxmvvm:Interaction.Behaviors>
+        <dx:SplashScreenManagerService PredefinedSplashScreenType="Fluent" StartupLocation="CenterScreen"/>
+    </dxmvvm:Interaction.Behaviors>
+
+    <ContentControl prism:RegionManager.RegionName="MainViewRegion" />
+</dx:ThemedWindow>

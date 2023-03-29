@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DevExpress.Wpf.Core" Version="22.2.3" />
+    <PackageReference Include="devexpress.wpf.docking" Version="22.2.3" />
+    <PackageReference Include="devexpress.wpf.grid.core" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf.PrismAdapters" Version="22.2.3" />
+    <PackageReference Include="devexpress.wpf.ribbon" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Themes.Win11Dark" Version="22.2.3" />
+    <PackageReference Include="DotNetProjects.SVGImage" Version="4.1.108" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.4" />
+    <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
+    <PackageReference Include="Prism.Wpf" Version="8.1.97" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EntityFramework\EntityFramework.csproj" />
+  </ItemGroup>
+
+</Project>

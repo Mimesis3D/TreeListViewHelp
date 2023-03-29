@@ -1,0 +1,74 @@
+﻿<UserControl
+    x:Class="TreeListViewControlExample.Views.ObjectListView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:svg1="https://github.com/dotnetprojects/SVGImage"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <UserControl.Resources>
+        <dxg:TreeListView
+            x:Key="TreeView-01"
+            AllowChildNodeSourceUpdates="True"
+            AllowDragDrop="True"
+            AutoExpandAllNodes="True"
+            AutoWidth="True"
+            NewItemRowPosition="Bottom"
+            ShowColumnHeaders="False"
+            ShowHorizontalLines="False"
+            ShowIndicator="False"
+            ShowVerticalLines="False"
+            TreeColumnFieldName="DisplayName"
+            TreeDerivationMode="HierarchicalDataTemplate"
+            ShowSearchPanelMode="Always"
+            SearchPanelHorizontalAlignment="Stretch"
+            VerticalScrollbarVisibility="Auto">
+            <dxg:TreeListView.DataRowTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Children, 
+                    UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                    <Grid Margin="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <svg1:SVGImage
+                            Grid.Column="0"
+                            Width="16"
+                            Height="16"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            OverrideColor="WhiteSmoke"/>
+
+                        <TextBlock
+                            Grid.Column="1"
+                            Margin="5 2 2 2"
+                            Text="{Binding DataContext.DisplayName, 
+                            UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    </Grid>
+                </HierarchicalDataTemplate>
+            </dxg:TreeListView.DataRowTemplate>
+        </dxg:TreeListView>
+    </UserControl.Resources>
+
+    <dx:LoadingDecorator>
+        <Border
+            Margin="7 0 7 7"
+            Background="#1C1C1C"
+            BorderThickness="0"
+            CornerRadius="7">
+            <dxg:GridControl
+                    Grid.Row="1"
+                    Background="Transparent"
+                    ItemsSource="{Binding ItemList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    View="{StaticResource ResourceKey=TreeView-01}" />
+        </Border>
+    </dx:LoadingDecorator>
+</UserControl>
