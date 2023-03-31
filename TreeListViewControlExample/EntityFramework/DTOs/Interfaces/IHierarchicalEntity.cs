@@ -13,6 +13,7 @@ namespace EntityFramework.DTOs.Interfaces
         public Guid? ParentTaskId { get; set; }
         public SessionDTO? ParentSession { get; set; }
         public Guid? ParentSessionId { get; set; }
+        public Guid? IconId { get; set; }
 
         ObservableCollection<ProjectDTO>? ProjectList { get; set; }
         ObservableCollection<TaskDTO>? TaskList { get; set; }

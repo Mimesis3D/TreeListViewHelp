@@ -10,12 +10,10 @@ namespace EntityFramework
         }
 
         public DbSet<ObjectCollectionDTO> ObjectCollections { get; set; }
-
         public DbSet<SessionDTO> Sessions { get; set; }
-
         public DbSet<ProjectDTO> Projects { get; set; }
-
         public DbSet<TaskDTO> Tasks { get; set; }
+        public DbSet<IconDTO> Icons { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

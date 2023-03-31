@@ -10,6 +10,6 @@ namespace EntityFramework.DTOs.Interfaces
         public DateTime CreationDate { get; set; }
         public DateTime ModifiedDate { get; set; }
         public string? Comments { get; set; }
-        public string? Icon { get; set; }
+        public Guid? IconId { get; set; }
     }
 }

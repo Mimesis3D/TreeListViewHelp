@@ -13,7 +13,9 @@ namespace EntityFramework.DTOs.Base
         public DateTime CreationDate { get; set ; }
         public DateTime ModifiedDate { get; set; }
         public string? Comments { get; set; }
-        public string? Icon { get; set; }
+
+        public Guid? IconId { get; set; }
+        public byte[]? Icon { get; set; }
 
         public Guid? ParentObjectCollectionId { get; set; }
         public ObjectCollectionDTO? ParentObjectCollection { get; set; }
@@ -28,28 +30,33 @@ namespace EntityFramework.DTOs.Base
         public ObservableCollection<TaskDTO>? TaskList { get; set; } = new();
         public ObservableCollection<SessionDTO>? SessionList { get; set; } = new();
 
+        private ObservableCollection<IHierarchicalEntity>? children;
         [NotMapped]
-        public virtual ObservableCollection<IHierarchicalEntity> Children
+        public virtual ObservableCollection<IHierarchicalEntity>? Children
         {
             get
             {
-                var children = new ObservableCollection<IHierarchicalEntity>();
-                foreach (var project in ProjectList)
+                if (children == null)
                 {
-                    children.Add(project);
-                }
-                foreach (var task in TaskList)
-                {
-                    children.Add(task);
-                }
-                foreach (var session in SessionList)
-                {
-                    children.Add(session);
+                    children = new ObservableCollection<IHierarchicalEntity>();
+                    foreach (var project in ProjectList)
+                    {
+                        children.Add(project);
+                    }
+                    foreach (var task in TaskList)
+                    {
+                        children.Add(task);
+                    }
+                    foreach (var session in SessionList)
+                    {
+                        children.Add(session);
+                    }
                 }
                 return children;
             }
             set { }
         }
 
+        
     }
 }

@@ -15,6 +15,8 @@ namespace EntityFramework.Utilities.Generators
         {
             if (_dbContext == null) return;
 
+            var _icon = await _dbContext.Set<IconDTO>().FirstOrDefaultAsync(x => x.FileName == "icons8-atom.svg");
+
             if ((await _dbContext.Set<ObjectCollectionDTO>().ToListAsync()).Count < 1)
             {
                 int i = 0;
@@ -26,6 +28,8 @@ namespace EntityFramework.Utilities.Generators
                         DisplayName = $"Objects",
                         Comments = "System Generated",
                         Description = $"ObjectCollection-{i} Description",
+                        IconId = _icon.Id,
+                        Icon = _icon.Data,
                         CreationDate = DateTime.UtcNow,
                         ModifiedDate = DateTime.UtcNow
                     };

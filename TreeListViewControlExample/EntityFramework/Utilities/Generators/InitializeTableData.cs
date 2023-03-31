@@ -4,7 +4,6 @@ using EntityFramework.DTOs;
 using EntityFramework.Utilities.Generators.Base;
 using Microsoft.EntityFrameworkCore;
 using Prism.Commands;
-using System;
 
 namespace EntityFramework.Utilities.Generators
 {
@@ -13,6 +12,7 @@ namespace EntityFramework.Utilities.Generators
         private readonly ProjectsTableSeedGtr _projectTableSeedGtr;
         private readonly SessionsTableSeedGtr _sessionTableSeedGtr;
         private readonly TasksTableSeedGtr _taskTableSeedGtr;
+        private readonly IconTableSeedGtr _iconTableSeedGtr;
         private readonly ObjectCollectionTableSeedGtr _objectCollectionTableSeedGtr;
 
         private List<ObjectCollectionDTO> objectCollection { get; set; }
@@ -26,13 +26,15 @@ namespace EntityFramework.Utilities.Generators
             _projectTableSeedGtr = new (dbContext);
             _sessionTableSeedGtr = new (dbContext);
             _taskTableSeedGtr = new (dbContext);
+            _iconTableSeedGtr = new (dbContext);
             _objectCollectionTableSeedGtr = new (dbContext);
+
 
             InitializeDataBaseCommand = new DelegateCommand(async () => await InitializeDataBase());
         }
         protected async ValueTask InitializeDataBase()
         {
-            
+            await _iconTableSeedGtr.InitializeDataTable();
             await _objectCollectionTableSeedGtr.InitializeDataTable();
             await _projectTableSeedGtr.InitializeDataTable();
             await _sessionTableSeedGtr.InitializeDataTable();

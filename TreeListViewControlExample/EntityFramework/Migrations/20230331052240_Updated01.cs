@@ -12,6 +12,33 @@ namespace EntityFramework.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Icons",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Source = table.Column<string>(type: "TEXT", nullable: true),
+                    FileName = table.Column<string>(type: "TEXT", nullable: true),
+                    FileExtension = table.Column<string>(type: "TEXT", nullable: true),
+                    Origin = table.Column<string>(type: "TEXT", nullable: true),
+                    Data = table.Column<byte[]>(type: "BLOB", nullable: true),
+                    DisplayName = table.Column<string>(type: "TEXT", nullable: true),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    CreationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Comments = table.Column<string>(type: "TEXT", nullable: true),
+                    IconId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    Icon = table.Column<byte[]>(type: "BLOB", nullable: true),
+                    ParentObjectCollectionId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    ParentProjectId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    ParentTaskId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    ParentSessionId = table.Column<Guid>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Icons", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ObjectCollections",
                 columns: table => new
                 {
@@ -21,7 +48,8 @@ namespace EntityFramework.Migrations
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Comments = table.Column<string>(type: "TEXT", nullable: true),
-                    Icon = table.Column<string>(type: "TEXT", nullable: true),
+                    IconId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    Icon = table.Column<byte[]>(type: "BLOB", nullable: true),
                     ParentObjectCollectionId = table.Column<Guid>(type: "TEXT", nullable: true),
                     ParentProjectId = table.Column<Guid>(type: "TEXT", nullable: true),
                     ParentTaskId = table.Column<Guid>(type: "TEXT", nullable: true),
@@ -43,12 +71,14 @@ namespace EntityFramework.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     ProjectName = table.Column<string>(type: "TEXT", nullable: true),
+                    IconDTOId = table.Column<Guid>(type: "TEXT", nullable: true),
                     DisplayName = table.Column<string>(type: "TEXT", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Comments = table.Column<string>(type: "TEXT", nullable: true),
-                    Icon = table.Column<string>(type: "TEXT", nullable: true),
+                    IconId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    Icon = table.Column<byte[]>(type: "BLOB", nullable: true),
                     ParentObjectCollectionId = table.Column<Guid>(type: "TEXT", nullable: true),
                     ParentProjectId = table.Column<Guid>(type: "TEXT", nullable: true),
                     ParentTaskId = table.Column<Guid>(type: "TEXT", nullable: true),
@@ -57,6 +87,11 @@ namespace EntityFramework.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Projects", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Projects_Icons_IconDTOId",
+                        column: x => x.IconDTOId,
+                        principalTable: "Icons",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Projects_ObjectCollections_ParentObjectCollectionId",
                         column: x => x.ParentObjectCollectionId,
@@ -75,12 +110,14 @@ namespace EntityFramework.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     SessionName = table.Column<string>(type: "TEXT", nullable: true),
+                    IconDTOId = table.Column<Guid>(type: "TEXT", nullable: true),
                     DisplayName = table.Column<string>(type: "TEXT", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Comments = table.Column<string>(type: "TEXT", nullable: true),
-                    Icon = table.Column<string>(type: "TEXT", nullable: true),
+                    IconId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    Icon = table.Column<byte[]>(type: "BLOB", nullable: true),
                     ParentObjectCollectionId = table.Column<Guid>(type: "TEXT", nullable: true),
                     ParentProjectId = table.Column<Guid>(type: "TEXT", nullable: true),
                     ParentTaskId = table.Column<Guid>(type: "TEXT", nullable: true),
@@ -89,6 +126,11 @@ namespace EntityFramework.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Sessions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Sessions_Icons_IconDTOId",
+                        column: x => x.IconDTOId,
+                        principalTable: "Icons",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Sessions_ObjectCollections_ParentObjectCollectionId",
                         column: x => x.ParentObjectCollectionId,
@@ -112,12 +154,14 @@ namespace EntityFramework.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     TaskName = table.Column<string>(type: "TEXT", nullable: true),
+                    IconDTOId = table.Column<Guid>(type: "TEXT", nullable: true),
                     DisplayName = table.Column<string>(type: "TEXT", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Comments = table.Column<string>(type: "TEXT", nullable: true),
-                    Icon = table.Column<string>(type: "TEXT", nullable: true),
+                    IconId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    Icon = table.Column<byte[]>(type: "BLOB", nullable: true),
                     ParentObjectCollectionId = table.Column<Guid>(type: "TEXT", nullable: true),
                     ParentProjectId = table.Column<Guid>(type: "TEXT", nullable: true),
                     ParentTaskId = table.Column<Guid>(type: "TEXT", nullable: true),
@@ -126,6 +170,11 @@ namespace EntityFramework.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tasks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Tasks_Icons_IconDTOId",
+                        column: x => x.IconDTOId,
+                        principalTable: "Icons",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Tasks_ObjectCollections_ParentObjectCollectionId",
                         column: x => x.ParentObjectCollectionId,
@@ -149,6 +198,26 @@ namespace EntityFramework.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Icons_ParentObjectCollectionId",
+                table: "Icons",
+                column: "ParentObjectCollectionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Icons_ParentProjectId",
+                table: "Icons",
+                column: "ParentProjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Icons_ParentSessionId",
+                table: "Icons",
+                column: "ParentSessionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Icons_ParentTaskId",
+                table: "Icons",
+                column: "ParentTaskId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ObjectCollections_ParentObjectCollectionId",
                 table: "ObjectCollections",
                 column: "ParentObjectCollectionId");
@@ -167,6 +236,11 @@ namespace EntityFramework.Migrations
                 name: "IX_ObjectCollections_ParentTaskId",
                 table: "ObjectCollections",
                 column: "ParentTaskId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Projects_IconDTOId",
+                table: "Projects",
+                column: "IconDTOId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Projects_ParentObjectCollectionId",
@@ -189,6 +263,11 @@ namespace EntityFramework.Migrations
                 column: "ParentTaskId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Sessions_IconDTOId",
+                table: "Sessions",
+                column: "IconDTOId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Sessions_ParentObjectCollectionId",
                 table: "Sessions",
                 column: "ParentObjectCollectionId");
@@ -209,6 +288,11 @@ namespace EntityFramework.Migrations
                 column: "ParentTaskId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Tasks_IconDTOId",
+                table: "Tasks",
+                column: "IconDTOId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Tasks_ParentObjectCollectionId",
                 table: "Tasks",
                 column: "ParentObjectCollectionId");
@@ -227,6 +311,34 @@ namespace EntityFramework.Migrations
                 name: "IX_Tasks_ParentTaskId",
                 table: "Tasks",
                 column: "ParentTaskId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Icons_ObjectCollections_ParentObjectCollectionId",
+                table: "Icons",
+                column: "ParentObjectCollectionId",
+                principalTable: "ObjectCollections",
+                principalColumn: "Id");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Icons_Projects_ParentProjectId",
+                table: "Icons",
+                column: "ParentProjectId",
+                principalTable: "Projects",
+                principalColumn: "Id");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Icons_Sessions_ParentSessionId",
+                table: "Icons",
+                column: "ParentSessionId",
+                principalTable: "Sessions",
+                principalColumn: "Id");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Icons_Tasks_ParentTaskId",
+                table: "Icons",
+                column: "ParentTaskId",
+                principalTable: "Tasks",
+                principalColumn: "Id");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_ObjectCollections_Projects_ParentProjectId",
@@ -275,8 +387,24 @@ namespace EntityFramework.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_ObjectCollections_Projects_ParentProjectId",
-                table: "ObjectCollections");
+                name: "FK_Icons_ObjectCollections_ParentObjectCollectionId",
+                table: "Icons");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Projects_ObjectCollections_ParentObjectCollectionId",
+                table: "Projects");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Sessions_ObjectCollections_ParentObjectCollectionId",
+                table: "Sessions");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Tasks_ObjectCollections_ParentObjectCollectionId",
+                table: "Tasks");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Icons_Projects_ParentProjectId",
+                table: "Icons");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_Sessions_Projects_ParentProjectId",
@@ -287,16 +415,19 @@ namespace EntityFramework.Migrations
                 table: "Tasks");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_ObjectCollections_Sessions_ParentSessionId",
-                table: "ObjectCollections");
+                name: "FK_Icons_Sessions_ParentSessionId",
+                table: "Icons");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_Tasks_Sessions_ParentSessionId",
                 table: "Tasks");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_ObjectCollections_Tasks_ParentTaskId",
-                table: "ObjectCollections");
+                name: "FK_Icons_Tasks_ParentTaskId",
+                table: "Icons");
+
+            migrationBuilder.DropTable(
+                name: "ObjectCollections");
 
             migrationBuilder.DropTable(
                 name: "Projects");
@@ -308,7 +439,7 @@ namespace EntityFramework.Migrations
                 name: "Tasks");
 
             migrationBuilder.DropTable(
-                name: "ObjectCollections");
+                name: "Icons");
         }
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Prism.Mvvm;
 using System.Threading.Tasks;
 using Prism.Regions;
+using System.Windows;
 
 namespace TreeListViewControlExample.ViewModels
 {
@@ -61,7 +62,7 @@ namespace TreeListViewControlExample.ViewModels
                     {
                         if(t.Exception != null)
                         {
-                            
+                            MessageBox.Show(t.Exception.Message);
                         }
                     },
                     TaskScheduler.FromCurrentSynchronizationContext());

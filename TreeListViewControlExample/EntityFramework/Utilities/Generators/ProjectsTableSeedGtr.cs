@@ -17,6 +17,8 @@ namespace EntityFramework.Utilities.Generators
             if (_dbContext == null)
                 return;
 
+            var _icon = await _dbContext.Set<IconDTO>().FirstOrDefaultAsync(x => x.FileName == "icons8-group-of-projects.svg");
+
             if ((await _dbContext.Set<ProjectDTO>().ToListAsync()).Count < 1)
             {
                 int i = 1;
@@ -29,6 +31,8 @@ namespace EntityFramework.Utilities.Generators
                         DisplayName = $"Project-{i}",
                         Comments = "System Generated",
                         Description = $"Session-{i} Description",
+                        IconId = _icon.Id,
+                        Icon = _icon.Data,
                         CreationDate = DateTime.UtcNow,
                         ModifiedDate = DateTime.UtcNow
                     };

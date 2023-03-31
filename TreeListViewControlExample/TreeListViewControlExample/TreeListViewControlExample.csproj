@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Icons\empty-file.svg" />
+    <None Remove="Assets\Icons\icons8-atom.svg" />
+    <None Remove="Assets\Icons\icons8-document.svg" />
+    <None Remove="Assets\Icons\icons8-group-of-projects.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="DevExpress.Wpf.Core" Version="22.2.3" />
     <PackageReference Include="devexpress.wpf.docking" Version="22.2.3" />
     <PackageReference Include="devexpress.wpf.grid.core" Version="22.2.3" />
@@ -27,6 +34,21 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EntityFramework\EntityFramework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\Icons\empty-file.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\icons8-atom.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\icons8-document.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\icons8-group-of-projects.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

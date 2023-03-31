@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EntityFramework.Migrations
 {
     [DbContext(typeof(MainDbContext))]
-    [Migration("20230328214843_Updated01")]
+    [Migration("20230331052240_Updated01")]
     partial class Updated01
     {
         /// <inheritdoc />
@@ -19,6 +19,73 @@ namespace EntityFramework.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.4");
+
+            modelBuilder.Entity("EntityFramework.DTOs.IconDTO", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Comments")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<byte[]>("Data")
+                        .HasColumnType("BLOB");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("DisplayName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FileExtension")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<byte[]>("Icon")
+                        .HasColumnType("BLOB");
+
+                    b.Property<Guid?>("IconId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Origin")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("ParentObjectCollectionId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("ParentProjectId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("ParentSessionId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("ParentTaskId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Source")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentObjectCollectionId");
+
+                    b.HasIndex("ParentProjectId");
+
+                    b.HasIndex("ParentSessionId");
+
+                    b.HasIndex("ParentTaskId");
+
+                    b.ToTable("Icons");
+                });
 
             modelBuilder.Entity("EntityFramework.DTOs.ObjectCollectionDTO", b =>
                 {
@@ -38,7 +105,10 @@ namespace EntityFramework.Migrations
                     b.Property<string>("DisplayName")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Icon")
+                    b.Property<byte[]>("Icon")
+                        .HasColumnType("BLOB");
+
+                    b.Property<Guid?>("IconId")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("ModifiedDate")
@@ -87,7 +157,13 @@ namespace EntityFramework.Migrations
                     b.Property<string>("DisplayName")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Icon")
+                    b.Property<byte[]>("Icon")
+                        .HasColumnType("BLOB");
+
+                    b.Property<Guid?>("IconDTOId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("IconId")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("ModifiedDate")
@@ -109,6 +185,8 @@ namespace EntityFramework.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IconDTOId");
 
                     b.HasIndex("ParentObjectCollectionId");
 
@@ -139,7 +217,13 @@ namespace EntityFramework.Migrations
                     b.Property<string>("DisplayName")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Icon")
+                    b.Property<byte[]>("Icon")
+                        .HasColumnType("BLOB");
+
+                    b.Property<Guid?>("IconDTOId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("IconId")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("ModifiedDate")
@@ -161,6 +245,8 @@ namespace EntityFramework.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IconDTOId");
 
                     b.HasIndex("ParentObjectCollectionId");
 
@@ -191,7 +277,13 @@ namespace EntityFramework.Migrations
                     b.Property<string>("DisplayName")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Icon")
+                    b.Property<byte[]>("Icon")
+                        .HasColumnType("BLOB");
+
+                    b.Property<Guid?>("IconDTOId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("IconId")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("ModifiedDate")
@@ -214,6 +306,8 @@ namespace EntityFramework.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IconDTOId");
+
                     b.HasIndex("ParentObjectCollectionId");
 
                     b.HasIndex("ParentProjectId");
@@ -223,6 +317,33 @@ namespace EntityFramework.Migrations
                     b.HasIndex("ParentTaskId");
 
                     b.ToTable("Tasks");
+                });
+
+            modelBuilder.Entity("EntityFramework.DTOs.IconDTO", b =>
+                {
+                    b.HasOne("EntityFramework.DTOs.ObjectCollectionDTO", "ParentObjectCollection")
+                        .WithMany()
+                        .HasForeignKey("ParentObjectCollectionId");
+
+                    b.HasOne("EntityFramework.DTOs.ProjectDTO", "ParentProject")
+                        .WithMany()
+                        .HasForeignKey("ParentProjectId");
+
+                    b.HasOne("EntityFramework.DTOs.SessionDTO", "ParentSession")
+                        .WithMany()
+                        .HasForeignKey("ParentSessionId");
+
+                    b.HasOne("EntityFramework.DTOs.TaskDTO", "ParentTask")
+                        .WithMany()
+                        .HasForeignKey("ParentTaskId");
+
+                    b.Navigation("ParentObjectCollection");
+
+                    b.Navigation("ParentProject");
+
+                    b.Navigation("ParentSession");
+
+                    b.Navigation("ParentTask");
                 });
 
             modelBuilder.Entity("EntityFramework.DTOs.ObjectCollectionDTO", b =>
@@ -254,6 +375,10 @@ namespace EntityFramework.Migrations
 
             modelBuilder.Entity("EntityFramework.DTOs.ProjectDTO", b =>
                 {
+                    b.HasOne("EntityFramework.DTOs.IconDTO", null)
+                        .WithMany("ProjectList")
+                        .HasForeignKey("IconDTOId");
+
                     b.HasOne("EntityFramework.DTOs.ObjectCollectionDTO", "ParentObjectCollection")
                         .WithMany("ProjectList")
                         .HasForeignKey("ParentObjectCollectionId");
@@ -281,6 +406,10 @@ namespace EntityFramework.Migrations
 
             modelBuilder.Entity("EntityFramework.DTOs.SessionDTO", b =>
                 {
+                    b.HasOne("EntityFramework.DTOs.IconDTO", null)
+                        .WithMany("SessionList")
+                        .HasForeignKey("IconDTOId");
+
                     b.HasOne("EntityFramework.DTOs.ObjectCollectionDTO", "ParentObjectCollection")
                         .WithMany("SessionList")
                         .HasForeignKey("ParentObjectCollectionId");
@@ -308,6 +437,10 @@ namespace EntityFramework.Migrations
 
             modelBuilder.Entity("EntityFramework.DTOs.TaskDTO", b =>
                 {
+                    b.HasOne("EntityFramework.DTOs.IconDTO", null)
+                        .WithMany("TaskList")
+                        .HasForeignKey("IconDTOId");
+
                     b.HasOne("EntityFramework.DTOs.ObjectCollectionDTO", "ParentObjectCollection")
                         .WithMany("TaskList")
                         .HasForeignKey("ParentObjectCollectionId");
@@ -331,6 +464,15 @@ namespace EntityFramework.Migrations
                     b.Navigation("ParentSession");
 
                     b.Navigation("ParentTask");
+                });
+
+            modelBuilder.Entity("EntityFramework.DTOs.IconDTO", b =>
+                {
+                    b.Navigation("ProjectList");
+
+                    b.Navigation("SessionList");
+
+                    b.Navigation("TaskList");
                 });
 
             modelBuilder.Entity("EntityFramework.DTOs.ObjectCollectionDTO", b =>

@@ -7,56 +7,10 @@
     xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
-    xmlns:svg1="https://github.com/dotnetprojects/SVGImage"
     mc:Ignorable="d"
     d:DesignHeight="450"
     d:DesignWidth="800"
     prism:ViewModelLocator.AutoWireViewModel="True">
-
-    <UserControl.Resources>
-        <dxg:TreeListView
-            x:Key="TreeView-01"
-            AllowChildNodeSourceUpdates="True"
-            AllowDragDrop="True"
-            AutoExpandAllNodes="True"
-            AutoWidth="True"
-            NewItemRowPosition="Bottom"
-            ShowColumnHeaders="False"
-            ShowHorizontalLines="False"
-            ShowIndicator="False"
-            ShowVerticalLines="False"
-            TreeColumnFieldName="DisplayName"
-            TreeDerivationMode="HierarchicalDataTemplate"
-            ShowSearchPanelMode="Always"
-            SearchPanelHorizontalAlignment="Stretch"
-            VerticalScrollbarVisibility="Auto">
-            <dxg:TreeListView.DataRowTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding Children, 
-                    UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
-                    <Grid Margin="2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <svg1:SVGImage
-                            Grid.Column="0"
-                            Width="16"
-                            Height="16"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            HorizontalContentAlignment="Center"
-                            OverrideColor="WhiteSmoke"/>
-
-                        <TextBlock
-                            Grid.Column="1"
-                            Margin="5 2 2 2"
-                            Text="{Binding DataContext.DisplayName, 
-                            UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-                    </Grid>
-                </HierarchicalDataTemplate>
-            </dxg:TreeListView.DataRowTemplate>
-        </dxg:TreeListView>
-    </UserControl.Resources>
 
     <dx:LoadingDecorator>
         <Border
@@ -65,10 +19,34 @@
             BorderThickness="0"
             CornerRadius="7">
             <dxg:GridControl
-                    Grid.Row="1"
-                    Background="Transparent"
-                    ItemsSource="{Binding ItemList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                    View="{StaticResource ResourceKey=TreeView-01}" />
+                x:Name="grid"
+                Grid.Row="1"
+                ShowBorder="False"
+                Background="Transparent"
+                ItemsSource="{Binding ItemList}">
+                <dxg:GridControl.View>
+                    <dxg:TreeListView
+                        x:Name="treeListView"
+                        AllowDragDrop="True"
+                        AutoExpandAllNodes="True"
+                        AutoWidth="True"
+                        ChildNodesPath="Children"
+                        ImageFieldName="Icon"
+                        NewItemRowPosition="Bottom"
+                        SearchPanelHorizontalAlignment="Stretch"
+                        SearchPanelFindMode="Always"
+                        ShowColumnHeaders="False"
+                        ShowHorizontalLines="False"
+                        ShowIndicator="False"
+                        ShowSearchPanelMode="Always"
+                        ShowVerticalLines="False"
+                        VerticalScrollbarVisibility="Auto"
+                        TreeDerivationMode="ChildNodesSelector" />
+                </dxg:GridControl.View>
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn FieldName="DisplayName" />
+                </dxg:GridControl.Columns>
+            </dxg:GridControl>
         </Border>
     </dx:LoadingDecorator>
 </UserControl>
